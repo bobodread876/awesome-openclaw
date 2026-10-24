@@ -1,6 +1,6 @@
 # OpenClaw Multi-Agent Dashboard
 
-A lightweight, self-hosted monitoring dashboard for OpenClaw multi-agent setups. Tracks node health, agent activity, LLM costs, and infrastructure spend — all from a single HTML page backed by a tiny Node.js server.
+A lightweight, self-hosted monitoring dashboard for OpenClaw multi-agent setups. Tracks node health, agent activity, LLM costs, and infrastructure spend, all from a single HTML page backed by a tiny Node.js server.
 
 **Live demo concept:** `https://monitor.yourdomain.com`
 
@@ -10,12 +10,12 @@ A lightweight, self-hosted monitoring dashboard for OpenClaw multi-agent setups.
 
 ## What It Does
 
-- **Node monitoring** — CPU, RAM, disk usage for local Macs, remote VPS, and paired OpenClaw nodes
-- **Agent activity** — tracks which agents are active, their last message, session count, and tool calls
-- **Cost tracking** — parses OpenClaw session logs to estimate per-agent LLM spend (daily/weekly/monthly)
-- **Subscription overview** — fixed monthly costs (API subscriptions, hosting, electricity)
-- **Auto-refresh** — polls `/api/metrics` every 60s for live updates
-- **Zero dependencies** — no React, no build step, no npm install. Pure Node.js + vanilla HTML/JS
+- **Node monitoring**: CPU, RAM, disk usage for local Macs, remote VPS, and paired OpenClaw nodes
+- **Agent activity**: tracks which agents are active, their last message, session count, and tool calls
+- **Cost tracking**: parses OpenClaw session logs to estimate per-agent LLM spend (daily/weekly/monthly)
+- **Subscription overview**: fixed monthly costs (API subscriptions, hosting, electricity)
+- **Auto-refresh**: polls `/api/metrics` every 60s for live updates
+- **Zero dependencies**: no React, no build step, no npm install. Pure Node.js + vanilla HTML/JS
 
 ---
 
@@ -47,7 +47,7 @@ A lightweight, self-hosted monitoring dashboard for OpenClaw multi-agent setups.
 
 | File | Purpose |
 |------|---------|
-| `server.mjs` | HTTP server — serves dashboard + `/api/metrics` endpoint |
+| `server.mjs` | HTTP server: serves dashboard + `/api/metrics` endpoint |
 | `dashboard.html` | Single-page dashboard UI (vanilla HTML/CSS/JS) |
 | `parse-activity.mjs` | Parses OpenClaw session `.jsonl` files for agent activity |
 | `parse-costs.mjs` | Estimates LLM costs from session logs using token counts |
@@ -61,7 +61,7 @@ A lightweight, self-hosted monitoring dashboard for OpenClaw multi-agent setups.
 - **Node.js** v18+ (v22 recommended)
 - **OpenClaw** installed and running (the dashboard reads its session logs)
 - **SSH access** to any remote Mac nodes (for metrics collection via SSH)
-- **Cloudflare Tunnel** (optional — for exposing the dashboard publicly)
+- **Cloudflare Tunnel** (optional: for exposing the dashboard publicly)
 
 ---
 
@@ -107,9 +107,9 @@ const NODES = {
 ```
 
 **Node types:**
-- `hub` — the local machine running OpenClaw (metrics collected locally via `top`/`vm_stat`/`df`)
-- `node` — a paired Mac node (metrics collected via SSH, must have passwordless SSH configured)
-- `vps` — a remote Linux VPS (runs `node-metrics.mjs` as a metrics agent on port 9100)
+- `hub`: the local machine running OpenClaw (metrics collected locally via `top`/`vm_stat`/`df`)
+- `node`: a paired Mac node (metrics collected via SSH, must have passwordless SSH configured)
+- `vps`: a remote Linux VPS (runs `node-metrics.mjs` as a metrics agent on port 9100)
 
 ### 3. Configure subscriptions (optional)
 
@@ -395,20 +395,20 @@ Returns a JSON payload with all dashboard data:
 ### Adding new nodes
 
 Add entries to the `NODES` object in `server.mjs`. Supported types:
-- **hub** — local machine, metrics via `top`/`vm_stat`/`df`
-- **node** — remote Mac, metrics via SSH (requires passwordless SSH keys)
-- **vps** — remote Linux, metrics via HTTP from `node-metrics.mjs` on port 9100
+- **hub**: local machine, metrics via `top`/`vm_stat`/`df`
+- **node**: remote Mac, metrics via SSH (requires passwordless SSH keys)
+- **vps**: remote Linux, metrics via HTTP from `node-metrics.mjs` on port 9100
 
 ### Modifying the dashboard UI
 
-Edit `dashboard.html` directly — it's a single self-contained HTML file with inline CSS and JS. No build step needed.
+Edit `dashboard.html` directly: it's a single self-contained HTML file with inline CSS and JS. No build step needed.
 
 ### Adding authentication
 
 The dashboard has no built-in auth. Options:
-- **Cloudflare Access** — add Zero Trust policies to your tunnel (recommended)
-- **Basic auth** — add HTTP basic auth in `server.mjs`
-- **VPN** — only expose on your local network
+- **Cloudflare Access**: add Zero Trust policies to your tunnel (recommended)
+- **Basic auth**: add HTTP basic auth in `server.mjs`
+- **VPN**, only expose on your local network
 
 ---
 
